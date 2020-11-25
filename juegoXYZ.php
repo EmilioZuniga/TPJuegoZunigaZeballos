@@ -202,7 +202,33 @@ function jugar($coleccionPalabras, $indicePalabra, $cantIntentos){
     $coleccionLetras = dividirPalabraEnLetras($pal);
     //print_r($coleccionLetras);
     $puntaje = 0;
+    $palabraFueDescubierta = false;
     
+    do{
+
+        echo "Ingrese una letra: ";
+        $letraIngresada = trim(fgets(STDIN));
+
+        $letraExiste = existeLetra($coleccionLetras, $letraIngresada);
+
+        if ($letraExiste == false){
+
+            $cantIntentos = ($cantIntentos - 1);
+            echo "La letra ",$letraIngresada," NO peretenece a la palabra. Quedan ",$cantIntentos," Intentos.";
+
+        }else{
+
+            echo "La letra ",$letraIngresada," PERTENECE a la palabra";
+
+            
+
+            $coleccionLetrasMod 
+
+        }
+
+
+        $palabraFueDescubierta = palabraDescubierta($coleccionLetras)
+    }while (!$palabraFueDescubrierta && $cantIntentos > 0)
     
     /*>>> Completar el cuerpo de la función, respetando lo indicado en la documentacion <<<*/
     
