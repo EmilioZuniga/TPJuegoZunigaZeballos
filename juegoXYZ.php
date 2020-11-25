@@ -3,12 +3,10 @@
 /******************************************
 *Completar:
 * NOMBRE Y APELLIDOS - LEGAJOS
+* EMILIO ZUÑIGA - FAI 2272
+* ALEJANDRO ZEBALLOS - FAI 611
 ******************************************/
-
-
-
-
-/**
+/** 1
 * genera un arreglo de palabras para jugar
 * @return array
 */
@@ -17,57 +15,71 @@ function cargarPalabras(){
   $coleccionPalabras[0]= array("palabra"=> "papa" , "pista" => "se cultiva bajo tierra", "puntosPalabra"=>7);
   $coleccionPalabras[1]= array("palabra"=> "hepatitis" , "pista" => "enfermedad que inflama el higado", "puntosPalabra"=> 7);
   $coleccionPalabras[2]= array("palabra"=> "volkswagen" , "pista" => "marca de vehiculo", "puntosPalabra"=> 10);
-  
-  /*>>> Agregar al menos 4 palabras más <<<*/
+  $coleccionPalabras[3]= array("palabra"=> "bicicleta" , "pista" => "tiene dos ruedas", "puntosPalabra"=> 10);
+  $coleccionPalabras[4]= array("palabra"=> "olla" , "pista" => "se usa para cocinar", "puntosPalabra"=> 7);
+  $coleccionPalabras[5]= array("palabra"=> "celular" , "pista" => "tiene pantalla tactil", "puntosPalabra"=> 9);
+  $coleccionPalabras[6]= array("palabra"=> "planta" , "pista" => "genera oxigeno", "puntosPalabra"=> 8);
+  $coleccionPalabras[7]= array("palabra"=> "parlante" , "pista" => "reproduce sonidos", "puntosPalabra"=> 10);
+  $coleccionPalabras[8]= array("palabra"=> "elefante" , "pista" => "el mamifero terestre mas grande", "puntosPalabra"=> 10);
   
   return $coleccionPalabras;
 }
 
-/**
-* /*>>> completar comentario <<<*/
-* 
-*/
+/** 2
+ * Genera un arreglo que almacena los puntajes de partidas anteriores
+ * @return array
+ */
 function cargarJuegos(){
 	$coleccionJuegos = array();
 	$coleccionJuegos[0] = array("puntos"=> 0, "indicePalabra" => 1);
 	$coleccionJuegos[1] = array("puntos"=> 10,"indicePalabra" => 2);
     $coleccionJuegos[2] = array("puntos"=> 0, "indicePalabra" => 1);
     $coleccionJuegos[3] = array("puntos"=> 8, "indicePalabra" => 0);
-    
-    /*>>> Agregar al menos 3 juegos realizados más <<<*/
+    $coleccionJuegos[4] = array("puntos"=> 0, "indicePalabra" => 5);
+    $coleccionJuegos[5] = array("puntos"=> 11, "indicePalabra" => 7);
+    $coleccionJuegos[6] = array("puntos"=> 9, "indicePalabra" => 4);
+    $coleccionJuegos[7] = array("puntos"=> 10, "indicePalabra" => 8);
+    $coleccionJuegos[8] = array("puntos"=> 0, "indicePalabra" => 6);
     
     return $coleccionJuegos;
 }
 
-/**
+/** 3
 * a partir de la palabra genera un arreglo para determinar si sus letras fueron o no descubiertas
 * @param string $palabra
 * @return array
 */
 function dividirPalabraEnLetras($palabra){
-    
-    /*>>> Completar para generar la estructura de datos b) indicada en el enunciado. 
-          recuerde que los string pueden ser recorridos como los arreglos.  <<<*/
-    
+    for ($i = 0; $i < strlen($palabra); $i++){
+        $coleccionLetras[$i] = 
+        ["letra" => $palabra[$i], 
+        "descubierta" => false];
+    }
+    return $coleccionLetras;  
 }
 
-/**
+/** 4
 * muestra y obtiene una opcion de menú ***válida***
 * @return int
 */
 function seleccionarOpcion(){
-    echo "--------------------------------------------------------------\n";
     echo "\n ( 1 ) Jugar con una palabra aleatoria"; 
-    
-    /*>>> Completar el menu <<<*/
-    
-    /*>>> Además controlar que la opción elegida es válida. Puede que el usuario se equivoque al elegir una opción <<<*/
-    
-    echo "--------------------------------------------------------------\n";
+    echo "\n ( 2 ) Jugar con una palabra elegida";
+    echo "\n ( 3 ) Aregar una palabra al listado"; 
+    echo "\n ( 4 ) Mostrar la información ompleta de un numero de juego";
+    echo "\n ( 5 ) Mostrar la información completa del primer juego con mas puntaje";
+    echo "\n ( 6 ) Mostrar la información completa del primer juego que supere un puntaje indicado por el usuario";
+    echo "\n ( 7 ) Mostrar la lista de palabras ordenadas por puntaje";
+    echo "\n ( 8 ) Salir";
+    echo "Indique la opción valida: ";
+    $opcion = trim(fgets (STDIN));
+    if ($opcion < 1 || $opcion > 8){
+        echo "\n Indique la opción valida: ";
+    }
     return $opcion;
 }
 
-/**
+/** 5
 * Determina si una palabra existe en el arreglo de palabras
 * @param array $coleccionPalabras
 * @param string $palabra
@@ -86,37 +98,65 @@ function existePalabra($coleccionPalabras,$palabra){
 }
 
 
-/**
+/** 6
 * Determina si una letra existe en el arreglo de letras
 * @param array $coleccionLetras
 * @param string $letra
 * @return boolean
 */
-function existeLetra(/*>>> Completar parámetros <<<*/ ){
+function existeLetra($coleccionLetras, $letra){
     
-    /*>>> Completar cuerpo de la función <<<*/
-
+    for ($i = 0; $i <count($coleccionLetras); $i++){
+        if ($letra == $coleccionLetras[$i]["letra"]){
+            $coleccionLetras[$i] = ["descubierta" => true];
+            $letraValida = true;
+           }
+        }
+        return $letraValida;
 }
 
-/**
+/** 7
 * Solicita los datos correspondientes a un elemento de la coleccion de palabras: palabra, pista y puntaje. 
 * Internamente la función también verifica que la palabra ingresada por el usuario no exista en la colección de palabras.
 * @param array $coleccionPalabras
 * @return array  colección de palabras modificada con la nueva palabra.
 */
-/*>>> Completar la interfaz y cuerpo de la función. Debe respetar la documentación <<<*/
+function cargarNuevaPalabra($coleccionPalabras){
+    do{ 
+    echo "\n Ingrese la palabra: ";
+    $palabraNueva = trim(fgets(STDIN));
+    $existePalabra = existePalabra($coleccionPalabras,$palabraNueva); 
+        if ($existePalabra == true){
+            echo "La palabra ya existe";
+        }
+    }while ($existePalabra == true);
+
+    $nuevoIndice = count($coleccionPalabras) + 1;
+    $coleccionPalabras[$nuevoIndice] = ["palabra" => $palabraNueva];
+
+    echo "\n Ingrese pista: ";
+    $pistaNueva = trim(fgets(STDIN));
+    $coleccionPalabras[$nuevoIndice] = ["pista" => $pistaNueva];
+
+    echo "\n Ingrese puntaje: ";
+    $puntajeNuevo = trim(fgets(STDIN));
+    $coleccionPalabras[$nuevoIndice] = ["puntosPalabras" => $puntajeNuevo];
+
+return $coleccionPalabras;
+}
 
 
-/**
-* Obtener indice aleatorio
-* /*>>> Completar documentacion <<<*/
+/** 8
+* Esta función obtiene un índice aleatorio. 
+* @param int $min, $max
+* @return int
 */
 function indiceAleatorioEntre($min,$max){
     $i = rand($min,$max); // /*>>> documente qué hace la función rand según el manual php.net en internet <<<*/
     return $i;
 }
 
-/**
+/** 9
 * solicitar un valor entre min y max
 * @param int $min
 * @param int $max
@@ -133,18 +173,27 @@ function solicitarIndiceEntre($min,$max){
 
 
 
-/**
+/** 10
 * Determinar si la palabra fue descubierta, es decir, todas las letras fueron descubiertas
 * @param array $coleccionLetras
 * @return boolean
 */
 function palabraDescubierta($coleccionLetras){
+    $canttidadLetras = count($coleccionLetras);
+    $i = 0;
+    $letraCorrecta = true;
+    while($i < $canttidadLetras && $letraCorrecta == true){
+        $letraCorrecta = $coleccionLetras[$i]["descubierta"] == true; 
+        $i++;
+    }
+    return $letraCorrecta;
     
-    /*>>> Completar el cuerpo de la función, respetando lo indicado en la documentacion <<<*/
 }
 
-/**
-* /*>>> Completar documentacion <<<*/
+/** 11
+* Se solicita una letra al usuario
+* @param
+* @return string $letra
 */
 function solicitarLetra(){
     $letraCorrecta = false;
@@ -162,7 +211,7 @@ function solicitarLetra(){
     return $letra;
 }
 
-/**
+/** 12
 * Descubre todas las letras de la colección de letras iguales a la letra ingresada.
 * Devuelve la coleccionLetras modificada, con las letras descubiertas
 * @param array $coleccionLetras
@@ -170,19 +219,31 @@ function solicitarLetra(){
 * @return array colección de letras modificada.
 */
 function destaparLetra($coleccionLetras, $letra){
+    $i = 0;
+    do{
+       if ($letra == $coleccionLetras[$i]["letra"]){
+           $coleccionLetras[$i] = ["decubierta" => true];
+       }
+       $i++;
+    }
+    while ($i < count($coleccionLetras));
     
-    /*>>> Completar el cuerpo de la función, respetando lo indicado en la documentacion <<<*/
+    return $coleccionLetras;
 }
 
-/**
+/** 13
 * obtiene la palabra con las letras descubiertas y * (asterisco) en las letras no descubiertas. Ejemplo: he**t*t*s
 * @param array $coleccionLetras
 * @return string  Ejemplo: "he**t*t*s"
 */
 function stringLetrasDescubiertas($coleccionLetras){
-    $pal = "";
-    
-    /*>>> Completar el cuerpo de la función, respetando lo indicado en la documentacion <<<*/
+    for ($i = 0; $i < count($coleccionLetras); $i++){
+        if ($coleccionLetras[$i]["descubierta"] == true){
+            $pal[$i] = $coleccionLetras[$i]["letra"]; 
+        }else{
+            $pal[$i] = "*";
+        }
+   }
     
     return $pal;
 }
