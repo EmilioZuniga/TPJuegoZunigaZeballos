@@ -485,7 +485,7 @@ do{
 
         if($indiceSuperado > -1){
             echo "\n\n";
-            echo "<-<-< Juego ".($indiceSuperado + 1)." >->->\n";
+            echo "<-<-< Juego ".$indiceSuperado." >->->\n";
             echo "  Puntos ganados: ".$coleccionJuegos[$indiceSuperado]["puntos"]."\n";
             echo "  Información de la palabra:\n";
             mostrarPalabra($coleccionPalabras,$coleccionJuegos[$indiceSuperado]["indicePalabra"]);
